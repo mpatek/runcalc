@@ -1,4 +1,5 @@
 # runcalc
+```shell
 Usage: runcalc [OPTIONS]
 
   Calculate running pace.
@@ -8,3 +9,4 @@ Options:
   -d, --distance FLOAT
   -u, --unit TEXT
   --help                Show this message and exit.
+```
