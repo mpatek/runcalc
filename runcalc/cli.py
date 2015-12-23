@@ -3,8 +3,8 @@ import re
 
 
 def time_str_to_seconds(s):
-    if re.match('^\d+$', s):
-        return int(s)
+    if re.match('^\d+(\.\d+)?$', s):
+        return float(s)
     if s.find(':') > 0:
         parts = [float(p) for p in s.split(':')]
         if len(parts) == 2:
