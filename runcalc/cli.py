@@ -42,6 +42,7 @@ TIME_PARAM = TimeType()
 @click.option('--distance', '-d', type=float)
 @click.option('--unit', '-u', default='mile')
 def cli(time, distance, unit):
+    """ Calculate running pace. """
     if not time:
         time = time_str_to_seconds(
             input('Enter the run time: ')
