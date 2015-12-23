@@ -1,0 +1,2 @@
+# runcalc
+Calculate running pace
