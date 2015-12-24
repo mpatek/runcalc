@@ -66,19 +66,22 @@ def format_timedelta(td):
         '14.26 seconds'
         >>> td = datetime.timedelta(seconds=64.6734)
         >>> format_timedelta(td)
-        '1:04.67 minutes'
+        '1 minute 4.67 seconds'
         >>> td = datetime.timedelta(seconds=3600)
         >>> format_timedelta(td)
         '1 hour'
         >>> td = datetime.timedelta(seconds=3673.123)
         >>> format_timedelta(td)
-        '1 hour 1:13.12 minutes'
+        '1 hour 1 minute 13.12 seconds'
+        >>> td = datetime.timedelta(seconds=.878)
+        >>> format_timedelta(td)
+        '0.88 seconds'
     """
     parts = []
     if td.days:
         parts.append('{} day{}'.format(td.days, 's' if td.days > 1 else ''))
 
-    if td.seconds:
+    if td.seconds or td.microseconds:
 
         hours = td.seconds // 3600
 
@@ -95,8 +98,8 @@ def format_timedelta(td):
                 minutes,
                 's' if minutes > 1 else '',
             ))
-        if seconds:
-            hundredths = round(td.microseconds / 10000)
+        if seconds or td.microseconds:
+            hundredths = int(round(td.microseconds / 10000.))
             f_hundredths = '.{}'.format(hundredths) if hundredths else ''
             parts.append('{}{} second{}'.format(
                 seconds,
@@ -128,7 +131,7 @@ def cli(time, distance, unit):
     """ Calculate running pace. """
     if not time:
         time = time_str_to_seconds(
-            input('Enter the run time: ')
+            str(input('Enter the run time: '))
         )
     if not distance:
         distance = float(
@@ -136,7 +139,7 @@ def cli(time, distance, unit):
         )
     pace = time / distance
     td = datetime.timedelta(seconds=pace)
-    print('Pace:', format_timedelta(td), 'per', unit)
+    print('Pace: {} per {}'.format(format_timedelta(td), unit))
 
 
 if __name__ == '__main__':

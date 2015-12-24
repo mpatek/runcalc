@@ -7,6 +7,7 @@ setup(
     author='Mike Patek',
     author_email='mpatek@gmail.com',
     url='https://github.com/mpatek/runcalc',
+    download_url='https://github.com/mpatek/runcalc/tarball/0.1',
     packages=['runcalc'],
     include_package_data=True,
     entry_points={
