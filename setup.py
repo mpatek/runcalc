@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='runcalc',
-    version='0.1',
+    version='0.1.1',
     description='Running pace calculator',
     author='Mike Patek',
     author_email='mpatek@gmail.com',
