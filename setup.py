@@ -17,4 +17,5 @@ setup(
     install_requires=['click'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
+    keywords=['running', 'exercise', 'cli'],
 )
