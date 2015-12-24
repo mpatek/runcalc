@@ -77,10 +77,9 @@ def format_timedelta(td):
     parts = []
     if td.days:
         parts.append('{} day{}'.format(td.days, 's' if td.days > 1 else ''))
+
     if td.seconds:
 
-        hundredths = round(td.microseconds / 10000)
-        f_hundredths = '.{}'.format(hundredths) if hundredths else ''
         hours = td.seconds // 3600
 
         if hours:
@@ -92,16 +91,19 @@ def format_timedelta(td):
             seconds = td.seconds % 60
 
         if minutes:
-            parts.append('{}:{}{} minutes'.format(
+            parts.append('{} minute{}'.format(
                 minutes,
-                '{:02d}'.format(seconds),
-                f_hundredths,
+                's' if minutes > 1 else '',
             ))
-        elif seconds:
-            parts.append('{}{} seconds'.format(
+        if seconds:
+            hundredths = round(td.microseconds / 10000)
+            f_hundredths = '.{}'.format(hundredths) if hundredths else ''
+            parts.append('{}{} second{}'.format(
                 seconds,
                 f_hundredths,
+                's' if seconds > 1 or f_hundredths else '',
             ))
+
     return ' '.join(parts)
 
 
