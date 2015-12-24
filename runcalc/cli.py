@@ -76,7 +76,19 @@ def format_timedelta(td):
         >>> td = datetime.timedelta(seconds=.878)
         >>> format_timedelta(td)
         '0.88 seconds'
+        >>> td = datetime.timedelta(seconds=0)
+        >>> format_timedelta(td)
+        '0 seconds'
+        >>> td = datetime.timedelta(seconds=1)
+        >>> format_timedelta(td)
+        '1 second'
+        >>> td = datetime.timedelta(seconds=1.234)
+        >>> format_timedelta(td)
+        '1.23 seconds'
     """
+    if not td:
+        return '0 seconds'
+
     parts = []
     if td.days:
         parts.append('{} day{}'.format(td.days, 's' if td.days > 1 else ''))
