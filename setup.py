@@ -13,5 +13,7 @@ setup(
         'console_scripts': [
             'runcalc=runcalc.cli:cli'
         ]
-    }
+    },
+    setup_requires=['pytest-runner','click'],
+    tests_require=['pytest'],
 )
