@@ -14,6 +14,7 @@ setup(
             'runcalc=runcalc.cli:cli'
         ]
     },
-    setup_requires=['pytest-runner','click'],
+    install_requires=['click'],
+    setup_requires=['pytest-runner'],
     tests_require=['pytest'],
 )
