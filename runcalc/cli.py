@@ -1,17 +1,26 @@
 import click
 import re
 
+_multipliers = {
+    's': 1,
+    'm': 60,
+    'h': 3600,
+}
+
+_pattern = re.compile(
+    '(?:(?:(?P<h>\d+):)?(?P<m>\d+):)?(?P<s>\d+(?:\.\d+)?)'
+)
+
 
 def time_str_to_seconds(s):
-    if re.match('^\d+(\.\d+)?$', s):
-        return float(s)
-    if s.find(':') > 0:
-        parts = [float(p) for p in s.split(':')]
-        if len(parts) == 2:
-            return 60 * parts[0] + parts[1]
-        elif len(parts) == 3:
-            return 60 * (60 * parts[0] + parts[1]) + parts[2]
-    raise ValueError('Unknown time format: {}'.format(s))
+    match = _pattern.match(s)
+    if match:
+        return sum(
+            _multipliers[k] * float(v)
+            for k, v in match.groupdict().items()
+            if v and k in _multipliers
+        )
+    raise ValueError('Unknown time format: "{}"'.format(s))
 
 
 def format_pace(pace, unit):
