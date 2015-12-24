@@ -104,7 +104,7 @@ def format_timedelta(td):
             parts.append('{}{} second{}'.format(
                 seconds,
                 f_hundredths,
-                's' if seconds > 1 or f_hundredths else '',
+                '' if (seconds == 1 and not f_hundredths) else 's',
             ))
 
     return ' '.join(parts)
